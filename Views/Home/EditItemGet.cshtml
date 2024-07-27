@@ -1,0 +1,55 @@
+﻿@model marketplace1.Models.Items
+@{
+    ViewBag.Title = "EditItem";
+}
+
+<style>
+    .centered-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f8f9fa; /* Light background color for contrast */
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: 600px;
+        background-color: #ffffff;
+        padding: 2rem;
+        border-radius: 0.375rem;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    }
+</style>
+
+<div class="centered-container">
+    <div class="form-container">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addItemModalLabel">Add New Item</h5>
+        </div>
+        <div class="modal-body">
+            <form method="post" action="/Home/EditItem">
+                <input type="hidden" class="form-control" name="Id" id="itemId" value="@Model.Id" placeholder="">
+
+                <div class="mb-3">
+                    <label for="itemName" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="Name" id="itemName" value="@Model.Name" placeholder="Enter item name">
+                </div>
+                <div class="mb-3">
+                    <label for="itemPrice" class="form-label">Price</label>
+                    <input type="number" class="form-control" name="Price" id="itemPrice" value="@Model.Price" placeholder="Enter item price">
+                </div>
+                <div class="mb-3">
+                    <label for="itemDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="itemDescription" name="Description" rows="3" placeholder="Enter item description">@Model.Description</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="itemCategory" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="itemCategory" value="@Model.Category" name="Category" placeholder="Enter item category">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Add Item</button>
+            </form>
+        </div>
+    </div>
+</div>
+

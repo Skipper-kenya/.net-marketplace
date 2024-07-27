@@ -1,0 +1,99 @@
+﻿@model  IList<marketplace1.Models.Items>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<style>
+    button {
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+    }
+
+        button i {
+            font-size: 1.5rem; /* Adjust size as needed */
+        }
+</style>
+
+<main>
+    <button type="button" style="margin-bottom:1rem;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add new Item
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addItemModalLabel">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        @*<span aria-hidden="true">&times;</span>*@
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Home/AddItem">
+                        <div class="form-group">
+                            <label for="itemName">Name</label>
+                            <input type="text" class="form-control" name="Name" id="itemName" placeholder="Enter item name">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemPrice">Price</label>
+                            <input type="number" class="form-control" name="Price" id="itemPrice" placeholder="Enter item price">
+                        </div>
+                        <div class="form-group">
+                            <label for="itemDescription">Description</label>
+                            <textarea class="form-control" id="itemDescription" name="Description" rows="3" placeholder="Enter item description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemCategory">Category</label>
+                            <input type="text" class="form-control" id="itemCategory" name="Category" placeholder="Enter item category">
+                        </div>
+
+
+                        <button style="margin-top:1rem;width:100%;" type="submit" class="btn btn-secondary">Add Item</button>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Price</h6>
+                        <p class="card-text">@item.Description</p>
+                        <p class="card-link">@item.Category</p>
+                        <div class="modal-footer">
+                            <form method="post" action="/Home/EditItemGet">
+                                <input type="hidden" name="Id" value="@item.Id" />
+                                <button type="submit">
+                                    <i style="color:green;font-size:15px; margin-right:0.5rem;" class="bi bi-pencil-fill"></i>
+                                </button>
+                            </form>
+                            <form method="post" action="/Home/DeleteItem">
+                                <input type="hidden" name="Id" value="@item.Id" />
+                                <button type="submit">
+                                    <i style="color: red; font-size: 15px;" class="bi bi-trash3"></i>
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</main>
