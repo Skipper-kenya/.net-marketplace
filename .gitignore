@@ -6,6 +6,10 @@
 # dotenv files
 .env
 
+.vs/marketplace1
+App_Data
+App_Start
+
 # User-specific files
 *.rsuser
 *.suo
